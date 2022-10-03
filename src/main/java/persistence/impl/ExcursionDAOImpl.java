@@ -105,8 +105,8 @@ public class ExcursionDAOImpl implements ExcursionDAO {
 	}
 
 	@Override
-	public int delete(Excursion t) {
+	public boolean delete(Integer id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return false;
 	}
 }

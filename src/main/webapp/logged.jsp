@@ -32,7 +32,7 @@
 					<li class="nav-item"><a class="nav-link" href="#">Perfil</a></li>
 					<c:choose>
 						<c:when test="${usuario.admin}">
-							<li class="nav-item"><a class="nav-link" href="administrador.do">Administrar</a></li>
+							<li class="nav-item"><a class="nav-link" href="adm-usuarios.do">Administrar</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="nav-item"><a class="nav-link disabled">Administrar</a></li>
@@ -94,8 +94,6 @@
 				class="visually-hidden">Next</span>
 		</button>
 	</div>
-
-	<!-- <p><c:out value="${ofertas.get(80).mostrarExcursiones()}"/></p> -->
 	
 	<!-- SELECCIÓN RAPIDA -->
 	

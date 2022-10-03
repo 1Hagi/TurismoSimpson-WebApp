@@ -149,15 +149,15 @@ public class PromocionDAOImpl implements PromocionDAO {
 	}
 
 	@Override
-	public int delete(Promocion t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public Promocion findByUsername(String username) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean delete(Integer id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

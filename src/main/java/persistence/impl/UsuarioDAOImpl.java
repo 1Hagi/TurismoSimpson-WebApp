@@ -73,15 +73,45 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public int update(Usuario t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Usuario usuario) {
+		try {
+			String sql = "UPDATE usuarios SET nombre = ?, contraseña = ?, admin = ?, fk_id_favorito = ?, tiempo_disponible = ?, dinero_disponible = ? "
+					+ "WHERE id = ?;";
+			
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setString(1, usuario.getNombre());
+			statement.setString(2, usuario.getContraseña());
+			statement.setBoolean(3, usuario.getAdmin());
+			statement.setInt(4, ofertaToNumber(usuario.getFavorito()));
+			statement.setInt(5, usuario.getTiempoDisponible());
+			statement.setDouble(6, usuario.getDineroDisponible());
+			statement.setInt(7, usuario.getId());
+			int rows = statement.executeUpdate();
+			
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override
-	public int delete(Usuario t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean delete(Integer id) {
+		try {
+			String sql = "UPDATE usuarios SET soft_delete = 1 "
+					+ "WHERE id = ?;";
+			
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setInt(1, id);
+			statement.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override
@@ -150,5 +180,24 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			return 6;
 		}
 		return 1;
+	}
+
+	@Override
+	public Usuario findByID(Integer id) {
+		String sql = "SELECT * FROM usuarios WHERE id = ?";
+		Connection conn;
+		PreparedStatement statement;
+		ResultSet resultado = null;
+		Usuario usuario = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			resultado = statement.executeQuery();
+			usuario = toUsuario(resultado);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return usuario;
 	}
 }
