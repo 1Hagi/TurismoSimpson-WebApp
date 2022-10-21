@@ -6,8 +6,8 @@ import persistence.commons.GenericDAO;
 
 public interface ExcursionDAO extends GenericDAO<Excursion> {
 
-	public abstract Excursion findByUsername(String username);
+	public abstract Excursion findByID(Integer id);
 
 	public abstract OfertaTipo toTipo(int tipoFavorito);
-
+	
 }

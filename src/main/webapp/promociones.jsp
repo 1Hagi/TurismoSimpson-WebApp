@@ -4,8 +4,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<jsp:include page="partials/head.jsp"></jsp:include>
-<title>Página de Inicio</title>
+
+	<!-- Includes -->
+	<jsp:include page="partials/head.jsp"></jsp:include>
+	
+	<!-- DataTables -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"> 
+	<script defer type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready( function () {
+	    $('#admin_tabla').DataTable(); } );
+	</script>
+	
+	<!-- Titulo -->
+	<title>Excursiones</title>
+	
 </head>
 <body style="background-color: rgb(255, 247, 149);">
 	
@@ -29,7 +43,7 @@
 						aria-current="page" href="logged.do">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="excursiones.do">Excursiones</a></li>
 					<li class="nav-item"><a class="nav-link" href="promociones.do">Promociones</a></li>
-					<li class="nav-item"><a class="nav-link" href="perfil.do">Perfil</a></li>
+					<li class="nav-item"><a class="nav-link" href="perfil.jsp">Perfil</a></li>
 					<c:choose>
 						<c:when test="${usuario.admin}">
 							<li class="nav-item"><a class="nav-link" href="adm-usuarios.do">Administrar</a></li>
@@ -65,36 +79,6 @@
 		</div>
 	</nav>
 	
-	<!-- EL CARRUSEL -->
-
-	<div id="carouselExampleControls" class="carousel slide w-50 mx-auto"
-		data-bs-ride="carousel" style="margin-top: 1rem">
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img src="./img/offers/742_Evergreen_Terrace.jpg" class="d-block w-100"
-					alt="imagen1">
-			</div>
-			<div class="carousel-item">
-				<img src="./img/simpson_ejemplo.jpg" class="d-block w-100"
-					alt="imagen2">
-			</div>
-			<div class="carousel-item">
-				<img src="./img/offers/744_Evergreen_Terrace.jpg" class="d-block w-100"
-					alt="imagen3">
-			</div>
-		</div>
-		<button class="carousel-control-prev" type="button"
-			data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-				class="visually-hidden">Previous</span>
-		</button>
-		<button class="carousel-control-next" type="button"
-			data-bs-target="#carouselExampleControls" data-bs-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
-				class="visually-hidden">Next</span>
-		</button>
-	</div>
-	
 	<!-- SELECCIÓN RAPIDA -->
 	
 	<hr class="mx-auto" width="95%">
@@ -110,36 +94,77 @@
 
 	<hr class="mx-auto" width="95%">
 	
-	<!-- OFERTAS INDIVIDUALES -->
+	<!-- SECCIÓN PROMOCIONES -->
 
-	<!-- <p><c:out value="${ofertas.size()}"></c:out></p> -->
-	
 	<div class="container" style="background-color:rgb(255, 216, 33)">
-		<div class="row" style="padding-top: 1em;">
-			
-			<c:forEach items="${ofertas}" var="oferta">
-				<div class="col-lg-3">
-					<div class="card" style="width: 16rem;">
-						<img src="<c:out value="${oferta.img}"></c:out>" height="140px" class="card-img-top"
-							alt="tarjeta">
-						<div class="card-body">
-							<h6 class="card-title text-center"><small><c:out value="${oferta.nombre}"></c:out></small></h6>
 
-							<p class="text-center;" style="background-color:rgb(0, 250, 244); padding:2px;">
-								<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">$
-								<c:out value="${oferta.getCosto()}"></c:out>0
-								<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
-								<c:out value="${oferta.getTiempo()}"></c:out> min.
-							</p>
-							
-							<a href="#ventana1" data-toggle="modal" class="btn btn-primary">Comprar</a>
-						</div>
-					</div>
-				</div>	
-			</c:forEach>
-			
-		</div>
+		<c:forEach items="${promociones}" var="promocion">
+		
+			<div style="height:20px"></div>
+			<div class="container">
+				<img src="<c:out value="${promocion.img}"></c:out>" style="display:inline;width:430px;float:left">
+				<br/>
+				<h2 style="display:inline"><c:out value="${promocion.nombre}"></c:out></h2>
+				<br/>
+				<p style="display:inline">
+					<c:out value="${promocion.descripcion}"></c:out>
+				</p>
+
+				<p class="text-center;" style="background-color:rgb(0, 250, 244);padding:2px;">
+					<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">$
+					<c:out value="${promocion.getCosto()}"></c:out>0
+					<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
+					<c:out value="${promocion.getTiempo()}"></c:out> min.
+				</p>
+				
+				<button type="button"
+				style="float:right;" 
+				class="btn btn-primary btn-sm data-bs-toggle=" 
+				data-bs-toggle="modal" 
+				data-bs-target="#comprar"
+				data-id="${promocion.id}"
+				data-nombre="${promocion.nombre}">
+					Comprar
+				</button>
+				<div style="clear:both;"></div>
+			</div>
+
+		</c:forEach>
+		
 	</div>
+	
+	<!-- MODAL COMPRA -->
+	
+	<div class="modal fade" id="comprar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel"></h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+	        <a class="modal-link btn btn-primary" href="#" role="button">COMPRAR</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- JQuery de Modal -->
+
+	<script>	
+		// Boton de Compra
+		$('#comprar').on('show.bs.modal', function(event) {
+			var boton = $(event.relatedTarget)
+			var id = boton.data('id')
+			var nombre = boton.data('nombre')
+			var modal = $(this)
+			modal.find('.modal-title').text('Comprar Excursión')
+			modal.find('.modal-body').text('¿Desea comprar la excursión ' + nombre + '?')
+			//modal.find('.modal-link').attr('href', 'excursion-editar.do?id=' + id)
+		})
+	</script>
 
 </body>
 </html>

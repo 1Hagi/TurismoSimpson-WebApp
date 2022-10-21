@@ -6,8 +6,8 @@ public class PromoPorcentual extends Promocion {
 
 	private Integer descuento;
 
-	public PromoPorcentual(String nombre, String imagen_ruta, Integer id, OfertaTipo tipo, List<Excursion> excursiones, Integer descuento) {
-		super(nombre, imagen_ruta, id, tipo, excursiones);
+	public PromoPorcentual(String nombre, String imagen_ruta, Integer id, OfertaTipo tipo, List<Excursion> excursiones, Integer descuento, String descripcion, String soft_delete) {
+		super(nombre, imagen_ruta, id, tipo, excursiones, descripcion, soft_delete);
 		this.descuento = descuento;
 	}
 

@@ -85,15 +85,15 @@ public class PromocionDAOImpl implements PromocionDAO {
 		switch (tipoPromocion) {
 		case 1:
 			unaPromocion = new PromoAbsoluta(resultados.getString("nombre"), resultados.getString("imagen_ruta"), resultados.getInt("id"), 
-					toTipo(resultados.getInt("fk_oferta_tipo")), listarExcursiones(resultados, excursiones), resultados.getDouble("costo_absoluto"));
+					toTipo(resultados.getInt("fk_oferta_tipo")), listarExcursiones(resultados, excursiones), resultados.getDouble("costo_absoluto"), resultados.getString("descripcion"), resultados.getString("soft_delete"));
 			break;
 		case 2:
 			unaPromocion = new PromoPorcentual(resultados.getString("nombre"), resultados.getString("imagen_ruta"), resultados.getInt("id"), 
-					toTipo(resultados.getInt("fk_oferta_tipo")), listarExcursiones(resultados, excursiones), resultados.getInt("costo_porcentual"));
+					toTipo(resultados.getInt("fk_oferta_tipo")), listarExcursiones(resultados, excursiones), resultados.getInt("costo_porcentual"), resultados.getString("descripcion"), resultados.getString("soft_delete"));
 			break;
 		case 3:
 			unaPromocion = new PromoAxB(resultados.getString("nombre"), resultados.getString("imagen_ruta"), resultados.getInt("id"), 
-					toTipo(resultados.getInt("fk_oferta_tipo")), listarExcursiones(resultados, excursiones), resultados.getInt("costo_axb"));
+					toTipo(resultados.getInt("fk_oferta_tipo")), listarExcursiones(resultados, excursiones), resultados.getInt("costo_axb"), resultados.getString("descripcion"), resultados.getString("soft_delete"));
 			break;
 		}
 		

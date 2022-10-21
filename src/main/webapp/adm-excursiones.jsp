@@ -32,8 +32,8 @@
 	<!-- Otras Secciones -->
 	
 	<br><div class="container text-center">
-		<a class="btn btn-primary" href="#" role="button">USUARIOS</a>
-		<a class="btn btn-outline-primary" href="#" role="button">EXCURSIONES</a>
+		<a class="btn btn-outline-primary" href="adm-usuarios.do" role="button">USUARIOS</a>
+		<a class="btn btn-primary" href="adm-excursiones.do" role="button">EXCURSIONES</a>
 		<a class="btn btn-outline-primary" href="#" role="button">PROMOCIONES</a>
 	</div><br>
 	
@@ -46,41 +46,39 @@
 				<tr>
 					<th>Id</th>
 					<th>Nombre</th>
-					<th>Contraseña</th>
-					<th>Dinero</th>
+					<th>Costo</th>
 					<th>Tiempo</th>
-					<th>Favorito</th>
-					<th>Admin</th>
+					<th>Tipo</th>
+					<th>Cupo</th>
 					<th>Eliminado</th>
 					<th>Opciones</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${usuarios}" var="usuario">
+				<c:forEach items="${excursiones}" var="excursion">
 					<tr>
-						<td><c:out value="${usuario.id}"></c:out></td>
-						<td><c:out value="${usuario.nombre}"></c:out></td>
-						<td><c:out value="${usuario.contraseña}"></c:out></td>
-						<td><c:out value="${usuario.dineroDisponible}"></c:out></td>
-						<td><c:out value="${usuario.tiempoDisponible}"></c:out></td>
-						<td><c:out value="${usuario.getFavorito()}"></c:out></td>
-						<td><c:out value="${usuario.admin ? 'Si' : 'No'}"></c:out></td>
-						<td><c:out value="${usuario.soft_delete ? 'Si' : 'No'}"></c:out></td>
+						<td><c:out value="${excursion.id}"></c:out></td>
+						<td><c:out value="${excursion.nombre}"></c:out></td>
+						<td><c:out value="${excursion.costo}"></c:out></td>
+						<td><c:out value="${excursion.tiempo}"></c:out></td>
+						<td><c:out value="${excursion.getTipo()}"></c:out></td>
+						<td><c:out value="${excursion.cupo}"></c:out></td>
+						<td><c:out value="${excursion.soft_delete ? 'Si' : 'No'}"></c:out></td>
 						<td>
 							<button type="button" 
 							class="btn btn-primary btn-sm data-bs-toggle=" 
 							data-bs-toggle="modal" 
 							data-bs-target="#editar_usuario"
-							data-id="${usuario.id}"
-							data-nombre="${usuario.nombre}">
+							data-id="${excursion.id}"
+							data-nombre="${excursion.nombre}">
 								Editar
 							</button>
 							<button type="button" 
 							class="btn btn-danger btn-sm"
 							data-bs-toggle="modal" 
 							data-bs-target="#eliminar_usuario"
-							data-id="${usuario.id}"
-							data-nombre="${usuario.nombre}">
+							data-id="${excursion.id}"
+							data-nombre="${excursion.nombre}">
 								Eliminar
 							</button>
 						</td>
@@ -90,7 +88,7 @@
 		</table>
 		
 		<div class="container text-center">
-			<a class="btn btn-primary" href="registro.jsp" role="button">Crear nuevo Usuario</a>
+			<a class="btn btn-primary" href="excursion-crear.jsp" role="button">Crear nueva Excursión</a>
 		</div>
 		
 		<br>
@@ -142,9 +140,9 @@
 			var id = boton.data('id')
 			var nombre = boton.data('nombre')
 			var modal = $(this)
-			modal.find('.modal-title').text('Editar usuario ' + nombre)
-			modal.find('.modal-body').text('¿Desea modificar datos del usuario ' + nombre + '?')
-			modal.find('.modal-link').attr('href', 'usuario-editar.do?id=' + id)
+			modal.find('.modal-title').text('Editar excursion ' + nombre)
+			modal.find('.modal-body').text('¿Desea modificar datos de la excursión ' + nombre + '?')
+			modal.find('.modal-link').attr('href', 'excursion-editar.do?id=' + id)
 		})
 		// Boton de Borrar
 		$('#eliminar_usuario').on('show.bs.modal', function(event) {
@@ -152,9 +150,9 @@
 			var id = boton.data('id')
 			var nombre = boton.data('nombre')
 			var modal = $(this)
-			modal.find('.modal-title').text('Eliminar usuario ' + nombre)
-			modal.find('.modal-body').text('¿Desea eliminar datos del usuario ' + nombre + '?')
-			modal.find('.modal-link').attr('href', 'usuario-eliminar.do?id=' + id)
+			modal.find('.modal-title').text('Eliminar excursion ' + nombre)
+			modal.find('.modal-body').text('¿Desea eliminar datos la excursión ' + nombre + '?')
+			modal.find('.modal-link').attr('href', 'excursion-eliminar.do?id=' + id)
 		})
 	</script>
 	

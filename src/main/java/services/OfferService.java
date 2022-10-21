@@ -26,4 +26,20 @@ public class OfferService {
 		
 		return offers;
 	}
+	
+	public List<Excursion> listE() {
+		
+		ExcursionDAO excursionDAO = DAOFactory.getExcursionDAO();
+		List<Excursion> excursions = excursionDAO.findAll();		
+
+		return excursions;
+	}
+	
+	public List<Promocion> listP() {
+		
+		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+		List<Promocion> promociones = promocionDAO.findAll();		
+
+		return promociones;
+	}
 }

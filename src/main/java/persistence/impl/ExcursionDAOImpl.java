@@ -3,6 +3,7 @@ package persistence.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,17 @@ public class ExcursionDAOImpl implements ExcursionDAO {
 
 	public int insert(Excursion excursion) {
 		try {
-			String sql = "INSERT INTO USERS (USERNAME, PASSWORD) VALUES (?, ?)";
+			String sql = "INSERT INTO excursiones (nombre, costo, tiempo, descripcion, id_tipo, imagen_ruta, cupo) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
 			
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, excursion.getNombre());
+			statement.setDouble(2, excursion.getCosto());
+			statement.setInt(3, excursion.getTiempo());
+			statement.setString(4, excursion.getDescripcion());
+			statement.setInt(5, ofertaToNumber(excursion.getTipo()));
+			statement.setString(6, excursion.getImg());
+			statement.setInt(7, excursion.getCupo());
 			int rows = statement.executeUpdate();
 			
 			return rows;
@@ -67,7 +74,15 @@ public class ExcursionDAOImpl implements ExcursionDAO {
 	
 	private Excursion toExcursion(ResultSet resultados) {
 		try {
-			return new Excursion(resultados.getString("nombre"), resultados.getString("imagen_ruta"), resultados.getInt("id"), toTipo(resultados.getInt("id_tipo")), resultados.getInt("tiempo"), resultados.getDouble("costo"), resultados.getInt("cupo"));
+			return new Excursion(resultados.getString("nombre"), 
+					resultados.getString("imagen_ruta"), 
+					resultados.getInt("id"), 
+					toTipo(resultados.getInt("id_tipo")), 
+					resultados.getInt("tiempo"), 
+					resultados.getDouble("costo"), 
+					resultados.getInt("cupo"), 
+					resultados.getString("descripcion"), 
+					resultados.getString("soft_delete"));
 
 		} catch (Exception e) {
 			throw new MissingDataException(e);
@@ -92,21 +107,80 @@ public class ExcursionDAOImpl implements ExcursionDAO {
 		return OfertaTipo.VISITAGUIADA;
 	}
 	
-	@Override
-	public Excursion findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public Excursion findByID(Integer id) {
+		String sql = "SELECT * FROM excursiones WHERE id = ?";
+		Connection conn;
+		PreparedStatement statement;
+		ResultSet resultado = null;
+		Excursion excursion = null;
+		try {
+			conn = ConnectionProvider.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			resultado = statement.executeQuery();
+			excursion = toExcursion(resultado);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return excursion;
 	}
 
 	@Override
-	public int update(Excursion t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Excursion excursion) {
+		try {
+			String sql = "UPDATE usuarios SET nombre = ?, contraseña = ?, admin = ?, fk_id_favorito = ?, tiempo_disponible = ?, dinero_disponible = ? "
+					+ "WHERE id = ?;";
+			
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setString(1, excursion.getNombre());
+			statement.setInt(2, ofertaToNumber(excursion.getTipo()));
+			statement.setInt(3, excursion.getTiempo());
+			statement.setDouble(4, excursion.getCosto());
+			statement.setInt(5, excursion.getCupo());
+			statement.setString(6, excursion.getDescripcion());
+			int rows = statement.executeUpdate();
+			
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override
 	public boolean delete(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			String sql = "UPDATE excursiones SET soft_delete = 1 "
+					+ "WHERE id = ?;";
+			
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setInt(1, id);
+			statement.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+	private Integer ofertaToNumber(OfertaTipo ofertaTipo) {
+		switch(ofertaTipo) {
+		case VISITAGUIADA:
+			return 1;
+		case ENTRETENIMIENTO:
+			return 2;
+		case TERROR:
+			return 3;
+		case RESTORAN:
+			return 4;
+		case FIESTA:
+			return 5;
+		case TIENDA:
+			return 6;
+		}
+		return 1;
 	}
 }

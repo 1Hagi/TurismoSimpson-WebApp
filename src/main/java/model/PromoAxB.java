@@ -6,8 +6,8 @@ public class PromoAxB extends Promocion {
 
 	private Integer cantGratis;
 
-	public PromoAxB(String nombre, String imagen_ruta, Integer id, OfertaTipo tipo, List<Excursion> excursiones, Integer cantGratis) {
-		super(nombre, imagen_ruta, id, tipo, excursiones);
+	public PromoAxB(String nombre, String imagen_ruta, Integer id, OfertaTipo tipo, List<Excursion> excursiones, Integer cantGratis, String descripcion, String soft_delete) {
+		super(nombre, imagen_ruta, id, tipo, excursiones, descripcion, soft_delete);
 		this.cantGratis = cantGratis;
 	}
 

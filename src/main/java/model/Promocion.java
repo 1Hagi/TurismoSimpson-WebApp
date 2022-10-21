@@ -6,8 +6,8 @@ public abstract class Promocion extends Oferta {
 
 	List<Excursion> excursiones;
 
-	public Promocion(String nombre, String imagen_ruta, Integer id, OfertaTipo tipo, List<Excursion> excursiones) {
-		super(nombre, imagen_ruta, id, tipo);
+	public Promocion(String nombre, String imagen_ruta, Integer id, OfertaTipo tipo, List<Excursion> excursiones, String descripcion, String soft_delete) {
+		super(nombre, imagen_ruta, id, tipo, descripcion, soft_delete);
 		this.excursiones = new ArrayList<Excursion>();
 		for (Excursion o : excursiones) {
 			this.excursiones.add(o);

@@ -42,8 +42,8 @@
 	<!-- Otras Secciones -->
 	
 	<br><div class="container text-center">
-		<a class="btn btn-primary" href="#" role="button">USUARIOS</a>
-		<a class="btn btn-outline-primary" href="#" role="button">EXCURSIONES</a>
+		<a class="btn btn-primary" href="adm-usuarios.do" role="button">USUARIOS</a>
+		<a class="btn btn-outline-primary" href="adm-excursiones.do" role="button">EXCURSIONES</a>
 		<a class="btn btn-outline-primary" href="#" role="button">PROMOCIONES</a>
 	</div><br>
 	

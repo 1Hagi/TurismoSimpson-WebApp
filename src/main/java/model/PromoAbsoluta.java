@@ -6,8 +6,8 @@ public class PromoAbsoluta extends Promocion {
 
 	private Double costo;
 
-	public PromoAbsoluta(String nombre, String imagen_ruta, Integer id, OfertaTipo tipo, List<Excursion> excursiones, Double costo) {
-		super(nombre, imagen_ruta, id, tipo, excursiones);
+	public PromoAbsoluta(String nombre, String imagen_ruta, Integer id, OfertaTipo tipo, List<Excursion> excursiones, Double costo, String descripcion, String soft_delete) {
+		super(nombre, imagen_ruta, id, tipo, excursiones, descripcion, soft_delete);
 		this.costo = costo;
 	}
 
