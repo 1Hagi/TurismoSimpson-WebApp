@@ -143,9 +143,19 @@ public class PromocionDAOImpl implements PromocionDAO {
 	}
 
 	@Override
-	public int update(Promocion t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateCupo(Promocion promocion) {
+		List<Excursion> excursiones = promocion.getExcursiones();
+		int rows = 0;
+		try {
+			for(Excursion excursion : excursiones) {
+				ExcursionDAO excursionDAO = DAOFactory.getExcursionDAO();
+				excursionDAO.updateCupo(excursion);
+				rows =+ 1;
+			}
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override
@@ -158,6 +168,43 @@ public class PromocionDAOImpl implements PromocionDAO {
 	public boolean delete(Integer id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public Promocion findByID(Integer id) {
+		String sql = "SELECT * FROM promociones WHERE id = ?";
+		Connection conn;
+		PreparedStatement statement;
+		ResultSet resultado = null;
+		Promocion promocion = null;
+		Integer excursionID;
+		List<Excursion> excursiones = new ArrayList<Excursion>();
+		ExcursionDAO excursionDAO = DAOFactory.getExcursionDAO();
+		
+		try {
+			conn = ConnectionProvider.getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			resultado = statement.executeQuery();
+			
+			for(int i = 1; i<=5; i++) {
+				excursionID = resultado.getInt("excursion" + i);
+				if(excursionID > 0) {
+					excursiones.add(excursionDAO.findByID(excursionID));
+				}
+			}
+			
+			promocion = toPromocion(resultado, excursiones);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return promocion;
+	}
+
+	@Override
+	public int update(Promocion t) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

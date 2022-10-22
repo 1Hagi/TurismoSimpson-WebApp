@@ -10,7 +10,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Excursion;
 import model.Promocion;
 import services.OfferService;
 
@@ -37,5 +36,5 @@ public class PromocionesServlet extends HttpServlet implements Servlet {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/promociones.jsp");
 		dispatcher.forward(req, resp);
 	}
-	
+
 }

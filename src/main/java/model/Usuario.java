@@ -164,4 +164,12 @@ public class Usuario {
 		this.soft_delete = soft_delete;
 	}
 
+	public boolean tieneDineroPara(Oferta oferta) {
+		return (this.dineroDisponible > oferta.getCosto()) ? true : false;
+	}
+
+	public boolean tieneTiempoPara(Oferta oferta) {
+		return (this.tiempoDisponible > oferta.getTiempo()) ? true : false;
+	}
+
 }

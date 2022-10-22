@@ -31,6 +31,10 @@ public abstract class Promocion extends Oferta {
 		}
 		return cupoTotal;
 	}
+	
+	public boolean hayCupoDisponible() {
+		return (this.getCupo() > 0) ? true : false;
+	}
 
 	public void venderCupo() {
 		for (Oferta e : this.excursiones) {

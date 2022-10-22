@@ -18,7 +18,7 @@
 	</script>
 	
 	<!-- Titulo -->
-	<title>Página de Inicio</title>
+	<title>Administrador Promocion</title>
 	
 </head>
 <body>
@@ -32,9 +32,9 @@
 	<!-- Otras Secciones -->
 	
 	<br><div class="container text-center">
-		<a class="btn btn-primary" href="#" role="button">USUARIOS</a>
-		<a class="btn btn-outline-primary" href="#" role="button">EXCURSIONES</a>
-		<a class="btn btn-outline-primary" href="#" role="button">PROMOCIONES</a>
+		<a class="btn btn-outline-primary" href="adm-usuarios.do" role="button">USUARIOS</a>
+		<a class="btn btn-outline-primary" href="adm-excursiones.do" role="button">EXCURSIONES</a>
+		<a class="btn btn-primary" href="adm-promociones.do" role="button">PROMOCIONES</a>
 	</div><br>
 	
 	<!-- la tabla de usuarios -->
@@ -46,41 +46,39 @@
 				<tr>
 					<th>Id</th>
 					<th>Nombre</th>
-					<th>Contraseña</th>
-					<th>Dinero</th>
+					<th>Costo</th>
 					<th>Tiempo</th>
-					<th>Favorito</th>
-					<th>Admin</th>
+					<th>Tipo</th>
+					<th>Cupo</th>
 					<th>Eliminado</th>
 					<th>Opciones</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${usuarios}" var="usuario">
+				<c:forEach items="${promociones}" var="promocion">
 					<tr>
-						<td><c:out value="${usuario.id}"></c:out></td>
-						<td><c:out value="${usuario.nombre}"></c:out></td>
-						<td><c:out value="${usuario.contraseña}"></c:out></td>
-						<td><c:out value="${usuario.dineroDisponible}"></c:out></td>
-						<td><c:out value="${usuario.tiempoDisponible}"></c:out></td>
-						<td><c:out value="${usuario.getFavorito()}"></c:out></td>
-						<td><c:out value="${usuario.admin ? 'Si' : 'No'}"></c:out></td>
-						<td><c:out value="${usuario.soft_delete ? 'Si' : 'No'}"></c:out></td>
+						<td><c:out value="${promocion.id}"></c:out></td>
+						<td><c:out value="${promocion.nombre}"></c:out></td>
+						<td><c:out value="${promocion.costo}"></c:out></td>
+						<td><c:out value="${promocion.tiempo}"></c:out></td>
+						<td><c:out value="${promocion.getTipo()}"></c:out></td>
+						<td><c:out value="${promocion.cupo}"></c:out></td>
+						<td><c:out value="${promocion.soft_delete ? 'Si' : 'No'}"></c:out></td>
 						<td>
 							<button type="button" 
 							class="btn btn-primary btn-sm data-bs-toggle=" 
 							data-bs-toggle="modal" 
-							data-bs-target="#editar_usuario"
-							data-id="${usuario.id}"
-							data-nombre="${usuario.nombre}">
+							data-bs-target="#editar_promocion"
+							data-id="${promocion.id}"
+							data-nombre="${promocion.nombre}">
 								Editar
 							</button>
 							<button type="button" 
 							class="btn btn-danger btn-sm"
 							data-bs-toggle="modal" 
-							data-bs-target="#eliminar_usuario"
-							data-id="${usuario.id}"
-							data-nombre="${usuario.nombre}">
+							data-bs-target="#eliminar_promocion"
+							data-id="${promocion.id}"
+							data-nombre="${promocion.nombre}">
 								Eliminar
 							</button>
 						</td>
@@ -90,7 +88,7 @@
 		</table>
 		
 		<div class="container text-center">
-			<a class="btn btn-primary" href="registro.jsp" role="button">Crear nuevo Usuario</a>
+			<a class="btn btn-primary" href="promocion-crear.jsp" role="button">Crear nueva Excursión</a>
 		</div>
 		
 		<br>
@@ -99,7 +97,7 @@
 	
 	<!-- Modal Modificar Usuario -->
 	
-	<div class="modal fade" id="editar_usuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="editar_promocion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -117,7 +115,7 @@
 	
 	<!-- Modal Eliminar Usuario -->
 	
-	<div class="modal fade" id="eliminar_usuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="eliminar_promocion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -137,24 +135,24 @@
 
 	<script>	
 		// Boton de Editar
-		$('#editar_usuario').on('show.bs.modal', function(event) {
+		$('#editar_promocion').on('show.bs.modal', function(event) {
 			var boton = $(event.relatedTarget)
 			var id = boton.data('id')
 			var nombre = boton.data('nombre')
 			var modal = $(this)
-			modal.find('.modal-title').text('Editar usuario ' + nombre)
-			modal.find('.modal-body').text('¿Desea modificar datos del usuario ' + nombre + '?')
-			modal.find('.modal-link').attr('href', 'usuario-editar.do?id=' + id)
+			modal.find('.modal-title').text('Editar una Promoción')
+			modal.find('.modal-body').text('¿Desea modificar datos de la promoción ' + nombre + '?')
+			modal.find('.modal-link').attr('href', 'promocion-editar.do?id=' + id)
 		})
 		// Boton de Borrar
-		$('#eliminar_usuario').on('show.bs.modal', function(event) {
+		$('#eliminar_promocion').on('show.bs.modal', function(event) {
 			var boton = $(event.relatedTarget)
 			var id = boton.data('id')
 			var nombre = boton.data('nombre')
 			var modal = $(this)
-			modal.find('.modal-title').text('Eliminar usuario ' + nombre)
-			modal.find('.modal-body').text('¿Desea eliminar datos del usuario ' + nombre + '?')
-			modal.find('.modal-link').attr('href', 'usuario-eliminar.do?id=' + id)
+			modal.find('.modal-title').text('Eliminar una Promocion')
+			modal.find('.modal-body').text('¿Desea eliminar datos la promocion ' + nombre + '?')
+			modal.find('.modal-link').attr('href', 'promocion-eliminar.do?id=' + id)
 		})
 	</script>
 	

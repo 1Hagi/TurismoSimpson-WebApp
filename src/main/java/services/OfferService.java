@@ -42,4 +42,12 @@ public class OfferService {
 
 		return promociones;
 	}
+	
+	public Promocion findbyPromID(int id) {
+		
+		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+		Promocion promocion = promocionDAO.findByID(id);
+
+		return promocion;		
+	}
 }

@@ -162,7 +162,7 @@
 			var modal = $(this)
 			modal.find('.modal-title').text('Comprar Excursión')
 			modal.find('.modal-body').text('¿Desea comprar la excursión ' + nombre + '?')
-			modal.find('.modal-link').attr('href', 'compra-prom.do?id=' + id)
+			//modal.find('.modal-link').attr('href', 'compra-exc.do?id=' + id)
 		})
 	</script>
 

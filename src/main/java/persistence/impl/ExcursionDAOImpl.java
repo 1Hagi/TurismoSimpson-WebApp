@@ -147,6 +147,24 @@ public class ExcursionDAOImpl implements ExcursionDAO {
 			throw new MissingDataException(e);
 		}
 	}
+	
+	public int updateCupo(Excursion excursion) {
+		try {
+			String sql = "UPDATE excursiones SET cupo = ? WHERE id = ?;";
+			
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setInt(1, excursion.getCupo());
+			statement.setInt(2, excursion.getId());
+;
+			int rows = statement.executeUpdate();
+			
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}	
 
 	@Override
 	public boolean delete(Integer id) {
