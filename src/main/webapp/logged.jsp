@@ -111,8 +111,6 @@
 	<hr class="mx-auto" width="95%">
 	
 	<!-- OFERTAS INDIVIDUALES -->
-
-	<!-- <p><c:out value="${ofertas.size()}"></c:out></p> -->
 	
 	<div class="container" style="background-color:rgb(255, 216, 33)">
 		<div class="row" style="padding-top: 1em;">
@@ -120,8 +118,23 @@
 			<c:forEach items="${ofertas}" var="oferta">
 				<div class="col-lg-3">
 					<div class="card" style="width: 16rem;">
+					
+						<c:if test = "${oferta.getClass() == 'class model.Excursion'}">
+							Excursion
+						</c:if>
+						<c:if test = "${oferta.getClass() == 'class model.PromoAbsoluta'}">
+							Promocion
+						</c:if>
+						<c:if test = "${oferta.getClass() == 'class model.PromoPorcentual'}">
+							Promocion
+						</c:if>
+						<c:if test = "${oferta.getClass() == 'class model.PromoAxB'}">
+							Promocion
+						</c:if>
+						
 						<img src="<c:out value="${oferta.img}"></c:out>" height="140px" class="card-img-top"
 							alt="tarjeta">
+							
 						<div class="card-body">
 							<h6 class="card-title text-center"><small><c:out value="${oferta.nombre}"></c:out></small></h6>
 
@@ -134,6 +147,7 @@
 							
 							<a href="#ventana1" data-toggle="modal" class="btn btn-primary">Comprar</a>
 						</div>
+						
 					</div>
 				</div>	
 			</c:forEach>

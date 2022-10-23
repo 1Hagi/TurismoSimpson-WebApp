@@ -148,6 +148,7 @@ public class ExcursionDAOImpl implements ExcursionDAO {
 		}
 	}
 	
+	@Override
 	public int updateCupo(Excursion excursion) {
 		try {
 			String sql = "UPDATE excursiones SET cupo = ? WHERE id = ?;";

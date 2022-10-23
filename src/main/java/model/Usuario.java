@@ -2,8 +2,8 @@ package model;
 
 import java.io.*;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Usuario {
@@ -57,26 +57,22 @@ public class Usuario {
 		return this.tipoFavorito;
 	}
 
-	public String getItinerario() {
-		return this.itinerario.toString();
+	public List<Oferta> getItinerario() {
+		return this.itinerario.getItinerario();
 	}
-
-	public ArrayList<Oferta> getOfertasCompradas() {
-		return this.itinerario.getOfertasCompradas();
+	
+	public void agregarUnaOferta(Oferta oferta) {
+		this.itinerario.agregarUnaOferta(oferta);
 	}
-
-	public ArrayList<Oferta> getOfertasIgnoradas() {
-		return this.itinerario.getOfertasIgnoradas();
+	
+	public void agregarOfertas(List<Oferta> oferta) {
+		this.itinerario.agregarOfertas(oferta);
 	}
 
 	public void comprar(Oferta unaOferta) {
 		this.dineroDisponible -= unaOferta.getCosto();
 		this.tiempoDisponible -= unaOferta.getTiempo();
-		this.itinerario.addOfertasCompradas(unaOferta);
-	}
-
-	public void denegar(Oferta unaOferta) {
-		this.itinerario.addOfertasIgnoradas(unaOferta);
+		this.itinerario.agregarUnaOferta(unaOferta);;
 	}
 
 	public boolean responderPregunta() throws IOException {

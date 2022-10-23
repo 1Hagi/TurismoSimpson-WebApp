@@ -1,13 +1,17 @@
 package persistence;
 
-import model.Itinerario;
-import model.Usuario;
+import java.util.List;
+
+import model.Oferta;
 import persistence.commons.GenericDAO;
 
-public interface CompraDAO extends GenericDAO<Itinerario> {
+public interface CompraDAO extends GenericDAO<Oferta> {
 	
-	public abstract Itinerario findByID(Integer id);
+	public abstract List<Oferta> findByUsuarioID(Integer id);
 
-	boolean delete(Integer id);
+	int insert(Integer id, Oferta oferta);
 
+	List<Oferta> findbyIDUserAll(Integer id);
+	
+	
 }

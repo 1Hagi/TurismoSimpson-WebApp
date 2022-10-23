@@ -57,4 +57,8 @@ public class Excursion extends Oferta {
 			
 		return errors.isEmpty();
 	}
+
+	public boolean hayCupoDisponible() {
+		return this.cupo > 0;
+	}
 }

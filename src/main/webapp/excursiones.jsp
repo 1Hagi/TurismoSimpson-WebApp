@@ -54,6 +54,48 @@
 					</c:choose>
 				</ul>
 				
+				<!-- Itinerario -->
+				
+				<div class="nav-item dropdown" style="margin-right:10px">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<img class="rounded-circle" 
+						style="width:40px;" alt="perfil"
+						src="img/itinerario.png">
+					</a>
+					<ul class="dropdown-menu dropdown-menu-end"
+						aria-labelledby="navbarDropdown">
+						<li>
+							
+							<c:set var="dineroTotal" value="${0}"></c:set>
+							<c:set var="tiempoTotal" value="${0}"></c:set>
+							
+							<c:forEach items="${usuario.getItinerario()}" var="itinerario">
+								<c:set var="dineroTotal" value="${dineroTotal + itinerario.getCosto()}"></c:set>
+								<c:set var="tiempoTotal" value="${tiempoTotal + itinerario.getTiempo()}"></c:set>
+								<div class="dropdown-item" href="#">
+									<img
+									style="display:inline;width:80px;height:40px;"
+									alt="imagen" 
+									src="<c:out value="${itinerario.img}"></c:out>">
+									<p style="display:inline;"><c:out value="${itinerario.nombre}"></c:out></p>
+								</div>
+							</c:forEach>
+							
+							<hr class="dropdown-divider">
+							
+							<div class="text-center">
+								<img class="rounded-circle nav-item" alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;widht:20px;">
+								<p style="display:inline;"><c:out value="${dineroTotal}"></c:out></p>
+								<img class="rounded-circle nav-item" alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;widht:20px;">
+								<p style="display:inline;"><c:out value="${tiempoTotal}"></c:out></p>
+							</div>
+							
+						</li>
+					</ul>
+				</div>
+				
+				<!-- Usuario -->			
 					
 				<img class="rounded-circle nav-item" alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">
 				<p class="aling-middle">$ <c:out value="${usuario.dineroDisponible}"></c:out>0</p>
@@ -109,24 +151,36 @@
 				<p style="display:inline">
 					<c:out value="${excursion.descripcion}"></c:out>
 				</p>
-
-				<p class="text-center;" style="background-color:rgb(0, 250, 244);padding:2px;">
-					<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">$
+				
+				<div style="clear:both;"></div>
+				
+				<p class="text-center w-3" style="background-color:rgb(0, 250, 244);padding:2px;">
+				
+					<img alt="dinero" src="./img/dinero.png" width="35px" style="display-block:inline;">$
 					<c:out value="${excursion.getCosto()}"></c:out>0
-					<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
+					
+					<img alt="tiempo" src="./img/tiempo.jpg" width="35px" style="display-block:inline;">
 					<c:out value="${excursion.getTiempo()}"></c:out> min.
+					
+					<img alt="cupo" src="./img/cupo.jpg" width="35px" style="display-block:inline;">
+					<c:out value="${excursion.getCupo()}"></c:out>
+					
+					<img alt="categoria" src="./img/categoria.jpg" width="35px" style="display-block:inline;">
+					<c:out value="${excursion.getTipo()}"></c:out>
+					
+					<button type="button"
+					style="float:right;" 
+					class="btn btn-primary btn-sm data-bs-toggle=" 
+					data-bs-toggle="modal" 
+					data-bs-target="#comprar"
+					data-id="${excursion.id}"
+					data-nombre="${excursion.nombre}">
+						Comprar
+					</button>
+				
 				</p>
 				
-				<button type="button"
-				style="float:right;" 
-				class="btn btn-primary btn-sm data-bs-toggle=" 
-				data-bs-toggle="modal" 
-				data-bs-target="#comprar"
-				data-id="${excursion.id}"
-				data-nombre="${excursion.nombre}">
-					Comprar
-				</button>
-				<div style="clear:both;"></div>
+
 			</div>
 
 		</c:forEach>
@@ -162,7 +216,7 @@
 			var modal = $(this)
 			modal.find('.modal-title').text('Comprar Excursión')
 			modal.find('.modal-body').text('¿Desea comprar la excursión ' + nombre + '?')
-			//modal.find('.modal-link').attr('href', 'compra-exc.do?id=' + id)
+			modal.find('.modal-link').attr('href', 'compra-exc.do?id=' + id)
 		})
 	</script>
 

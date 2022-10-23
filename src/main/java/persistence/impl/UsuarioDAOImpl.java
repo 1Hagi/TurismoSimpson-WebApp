@@ -7,10 +7,13 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import model.Oferta;
 import model.OfertaTipo;
 import model.Usuario;
+import persistence.CompraDAO;
 import persistence.UsuarioDAO;
 import persistence.commons.ConnectionProvider;
+import persistence.commons.DAOFactory;
 import persistence.commons.MissingDataException;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
@@ -129,7 +132,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 			if (resultados.next()) {
 				usuario = toUsuario(resultados);
+				
+				//Obtener itinerario completo
+				CompraDAO compraDAO = DAOFactory.getCompraDAO();
+				List<Oferta> itinerario = compraDAO.findbyIDUserAll(usuario.getId());
+				if(itinerario != null) {
+					usuario.agregarOfertas(itinerario);
+				}				
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -195,6 +206,14 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			statement.setInt(1, id);
 			resultado = statement.executeQuery();
 			usuario = toUsuario(resultado);
+			
+			//Obtener itinerario completo
+			CompraDAO compraDAO = DAOFactory.getCompraDAO();
+			List<Oferta> itinerario = compraDAO.findbyIDUserAll(id);
+			if(itinerario != null) {
+				usuario.agregarOfertas(itinerario);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -142,7 +142,6 @@ public class PromocionDAOImpl implements PromocionDAO {
 		return 0;
 	}
 
-	@Override
 	public int updateCupo(Promocion promocion) {
 		List<Excursion> excursiones = promocion.getExcursiones();
 		int rows = 0;

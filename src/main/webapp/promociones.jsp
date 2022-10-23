@@ -105,28 +105,86 @@
 				<img src="<c:out value="${promocion.img}"></c:out>" style="display:inline;width:430px;float:left">
 				<br/>
 				<h2 style="display:inline"><c:out value="${promocion.nombre}"></c:out></h2>
-				<br/>
+				<br/><br/>
+				
+				<p>Excursiones Incluidas :</p>
+				
 				<p style="display:inline">
 					<c:out value="${promocion.descripcion}"></c:out>
 				</p>
+				
+				<c:forEach items="${promocion.getExcursiones()}" var="exc">
+					<p style="display:inline">
+						<img 
+						style="display:inline;width:80px;height:40px;"
+						alt="imagen" 
+						src="<c:out value="${exc.img}"></c:out>">
+						<c:out value="${exc.nombre}"></c:out>
+					</p>
+					<br/>		
+				</c:forEach>
+				
+				<div style="clear:both;"></div>
 
-				<p class="text-center;" style="background-color:rgb(0, 250, 244);padding:2px;">
+				<p class="text-center" style="background-color:rgb(0, 250, 244);padding:2px;">
+				
 					<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">$
 					<c:out value="${promocion.getCosto()}"></c:out>0
+				
 					<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
 					<c:out value="${promocion.getTiempo()}"></c:out> min.
+					
+					<img alt="cupo" src="./img/cupo.jpg" width="35px" style="display-block:inline;">
+					<c:out value="${promocion.getCupo()}"></c:out>
+					
+					<img alt="categoria" src="./img/categoria.jpg" width="35px" style="display-block:inline;">
+					<c:out value="${promocion.getTipo()}"></c:out>
+					
+					<c:if test = "${promocion.getClass() == 'class model.PromoAbsoluta'}">
+						Promocion Absoluta
+					</c:if>
+					<c:if test = "${promocion.getClass() == 'class model.PromoPorcentual'}">
+						Promocion Porcentual
+					</c:if>
+					<c:if test = "${promocion.getClass() == 'class model.PromoAxB'}">
+						Promocion AxB
+					</c:if>
+					
+					<c:choose>
+						<c:when test="${
+						usuario.dineroDisponible < promocion.getCosto() || 
+						usuario.tiempoDisponible < promocion.getTiempo() || 
+						promocion.getCupo() < 0
+						}">
+							<button type="button" 
+							style="float:right;" 
+							class="btn btn-primary btn-sm data-bs-toggle=" 
+							data-bs-toggle="modal" 
+							data-bs-target="#comprar" 
+							data-id="${promocion.id}" 
+							data-nombre="${promocion.nombre}" 
+							disabled
+							>
+								Comprar
+							</button>
+						</c:when>
+						<c:otherwise>
+							<button type="button" 
+							style="float:right;" 
+							class="btn btn-primary btn-sm data-bs-toggle=" 
+							data-bs-toggle="modal" 
+							data-bs-target="#comprar" 
+							data-id="${promocion.id}" 
+							data-nombre="${promocion.nombre}"
+							>
+								Comprar
+							</button>
+						</c:otherwise>
+					</c:choose>
+					
 				</p>
-				
-				<button type="button"
-				style="float:right;" 
-				class="btn btn-primary btn-sm data-bs-toggle=" 
-				data-bs-toggle="modal" 
-				data-bs-target="#comprar"
-				data-id="${promocion.id}"
-				data-nombre="${promocion.nombre}">
-					Comprar
-				</button>
-				<div style="clear:both;"></div>
+
+
 			</div>
 
 		</c:forEach>

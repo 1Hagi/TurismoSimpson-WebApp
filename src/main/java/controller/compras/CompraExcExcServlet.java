@@ -1,6 +1,7 @@
 package controller.compras;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import jakarta.servlet.RequestDispatcher;
@@ -10,12 +11,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Oferta;
 import model.Usuario;
 import persistence.commons.DAOFactory;
 import services.CompraService;
 
-@WebServlet("/compra-prom.do")
-public class CompraPromPromServlet extends HttpServlet implements Servlet {
+@WebServlet("/compra-exc.do")
+public class CompraExcExcServlet extends HttpServlet implements Servlet {
 	
 	private static final long serialVersionUID = 3455721046062278592L;
 	private CompraService compraService;
@@ -31,10 +33,12 @@ public class CompraPromPromServlet extends HttpServlet implements Servlet {
 
 		Integer promocionID = Integer.parseInt(req.getParameter("id"));
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
-		Map<String, String> errors = compraService.compraProm(usuario.getId(), promocionID);
+		Map<String, String> errors = compraService.compraExc(usuario.getId(), promocionID);
 		
 		Usuario usuarioActualizado = DAOFactory.getUsuarioDAO().findByID(usuario.getId());
+		List<Oferta> itinerarioCompleto = usuario.getItinerario();
 		req.getSession().setAttribute("usuario", usuarioActualizado);
+		req.getSession().setAttribute("itinerarioCompleto", itinerarioCompleto);
 		
 		if (errors.isEmpty()) {
 			req.setAttribute("success", "¡Gracias por comprar!");
