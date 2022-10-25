@@ -25,72 +25,7 @@
 	
 	<!-- BARRA DE NAVEGACION -->
 	
-	<nav class="navbar navbar-expand-lg">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#"> <img width="200"
-				src="https://fontmeme.com/permalink/220714/30ddf82c2275e6e6549ac8e17a01f583.png"
-				alt="fuente-simpsonfont" border="0">
-			</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="logged.do">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="excursiones.do">Excursiones</a></li>
-					<li class="nav-item"><a class="nav-link" href="promociones.do">Promociones</a></li>
-					<li class="nav-item"><a class="nav-link" href="perfil.jsp">Perfil</a></li>
-					<c:choose>
-						<c:when test="${usuario.admin}">
-							<li class="nav-item"><a class="nav-link" href="adm-usuarios.do">Administrar</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="nav-item"><a class="nav-link disabled">Administrar</a></li>
-						</c:otherwise>
-					</c:choose>
-				</ul>
-				
-					
-				<img class="rounded-circle nav-item" alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">
-				<p class="aling-middle">$ <c:out value="${usuario.dineroDisponible}"></c:out>0</p>
-				
-				<img class="rounded-circle" alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
-				<p class="aling-middle"><c:out value="${usuario.tiempoDisponible}"></c:out>'</p>
-				
-				<div class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						<img class="rounded-circle" style="padding-left: 8px" alt="perfil"
-						src="img/profile/02.png">
-					</a>
-					<ul class="dropdown-menu dropdown-menu-end"
-						aria-labelledby="navbarDropdown">
-						<li><a class="dropdown-item" href="#">Settings</a></li>
-						<li><a class="dropdown-item" href="#">Perfil</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="inicio.jsp">Disconnect</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</nav>
-	
-	<!-- SELECCIÓN RAPIDA -->
-	
-	<hr class="mx-auto" width="95%">
-
-		<div class="mx-auto text-center">
-			<a class="btn btn-primary" href="#" role="button">Visita Guiada</a> 
-			<a class="btn btn-primary" href="#" role="button">Entretenimiento</a> 
-			<a class="btn btn-primary" href="#" role="button">Terror</a> 
-			<a class="btn btn-primary" href="#" role="button">Restorán</a> 
-			<a class="btn btn-primary" href="#" role="button">Fiesta</a> 
-			<a class="btn btn-primary" href="#" role="button">Tienda</a>
-		</div>
+	<jsp:include page="partials/navbar.jsp"></jsp:include>
 
 	<hr class="mx-auto" width="95%">
 	
@@ -100,93 +35,326 @@
 
 		<c:forEach items="${promociones}" var="promocion">
 		
-			<div style="height:20px"></div>
-			<div class="container">
-				<img src="<c:out value="${promocion.img}"></c:out>" style="display:inline;width:430px;float:left">
-				<br/>
-				<h2 style="display:inline"><c:out value="${promocion.nombre}"></c:out></h2>
-				<br/><br/>
-				
-				<p>Excursiones Incluidas :</p>
-				
-				<p style="display:inline">
-					<c:out value="${promocion.descripcion}"></c:out>
-				</p>
-				
-				<c:forEach items="${promocion.getExcursiones()}" var="exc">
+			<c:if test = "${promocion.getClass() == 'class model.PromoAbsoluta'}">
+				<div style="height:20px"></div>
+				<div class="container" style="background-color:white;box-shadow:2px 2px 2px 2px #592A08;">
+					<img src="<c:out value="${promocion.img}"></c:out>" style="display:inline;width:430px;float:left;margin:auto;">
+					<br/>
+					<h2 style="display:inline;padding-left:20px;"><c:out value="${promocion.nombre}"></c:out></h2>
+					<br/><br/>
+					
+					<p style="display:inline;padding-left:20px;">Excursiones Incluidas :</p>
+					<br/><br/>
+					
 					<p style="display:inline">
-						<img 
-						style="display:inline;width:80px;height:40px;"
-						alt="imagen" 
-						src="<c:out value="${exc.img}"></c:out>">
-						<c:out value="${exc.nombre}"></c:out>
+						<c:out value="${promocion.descripcion}"></c:out>
 					</p>
-					<br/>		
-				</c:forEach>
-				
-				<div style="clear:both;"></div>
-
-				<p class="text-center" style="background-color:rgb(0, 250, 244);padding:2px;">
-				
-					<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">$
-					<c:out value="${promocion.getCosto()}"></c:out>0
-				
-					<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
-					<c:out value="${promocion.getTiempo()}"></c:out> min.
+					<hr style="width:55%;margin:auto;"/>
 					
-					<img alt="cupo" src="./img/cupo.jpg" width="35px" style="display-block:inline;">
-					<c:out value="${promocion.getCupo()}"></c:out>
+					<c:forEach items="${promocion.getExcursiones()}" var="exc">
+						<p style="display:inline;padding-left:20px;">
+							<img 
+							style="display:inline;width:80px;height:40px;"
+							alt="imagen" 
+							src="<c:out value="${exc.img}"></c:out>">
+							<c:out value="${exc.nombre}"></c:out>
+						</p>
+						<i class="fa-solid fa-tags" style="color:#ffbb22;margin-left:5px;"></i>
+						<p style="display:inline;"><c:out value="${exc.getCupo()}"></c:out></p>
+						<i class="fa-solid fa-money-bill-1-wave" style="color:#ffbb22;margin-left:5px;"></i>
+						<p style="display:inline;text-decoration:line-through;"><c:out value="${exc.getCosto()}">0</c:out></p>
+						<i class="fa-solid fa-clock" style="color:#ffbb22;margin-left:5px;"></i>
+						<p style="display:inline;"><c:out value="${exc.getTiempo()}"> min.</c:out></p>
+						
+						<i class="fa-solid fa-check" style="float:right;color:#11bb66;"></i>
+						<br/>
+						<hr style="width:55%;margin:auto;"/>
+					</c:forEach>
 					
-					<img alt="categoria" src="./img/categoria.jpg" width="35px" style="display-block:inline;">
-					<c:out value="${promocion.getTipo()}"></c:out>
+					<div style="clear:both;"></div>
+	
+					<div class="text-center" style="background-color:#71d0f599;padding:2px;">
 					
-					<c:if test = "${promocion.getClass() == 'class model.PromoAbsoluta'}">
-						Promocion Absoluta
-					</c:if>
-					<c:if test = "${promocion.getClass() == 'class model.PromoPorcentual'}">
-						Promocion Porcentual
-					</c:if>
-					<c:if test = "${promocion.getClass() == 'class model.PromoAxB'}">
-						Promocion AxB
-					</c:if>
+						<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;background-color:white;">
+						<p style="display:inline;margin-right:5px;"><strong>$<c:out value="${promocion.getCosto()}"></c:out>0</strong></p>
 					
-					<c:choose>
-						<c:when test="${
-						usuario.dineroDisponible < promocion.getCosto() || 
-						usuario.tiempoDisponible < promocion.getTiempo() || 
-						promocion.getCupo() < 0
-						}">
-							<button type="button" 
-							style="float:right;" 
-							class="btn btn-primary btn-sm data-bs-toggle=" 
-							data-bs-toggle="modal" 
-							data-bs-target="#comprar" 
-							data-id="${promocion.id}" 
-							data-nombre="${promocion.nombre}" 
-							disabled
-							>
-								Comprar
-							</button>
-						</c:when>
-						<c:otherwise>
-							<button type="button" 
-							style="float:right;" 
-							class="btn btn-primary btn-sm data-bs-toggle=" 
-							data-bs-toggle="modal" 
-							data-bs-target="#comprar" 
-							data-id="${promocion.id}" 
-							data-nombre="${promocion.nombre}"
-							>
-								Comprar
-							</button>
-						</c:otherwise>
-					</c:choose>
+						<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
+						<p style="display:inline;margin-right:5px;"><strong><c:out value="${promocion.getTiempo()}"></c:out> min.</strong></p>
+						
+						<img alt="cupo" src="./img/cupo.jpg" width="35px" style="display-block:inline;">
+						<p style="display:inline;margin-right:5px;"><strong><c:out value="${promocion.getCupo()}"></c:out></strong></p>
+							
+						<p style="display:inline;margin-right:5px;padding:5px;border-radius:10px;background-color:#11bb66;color:white;"><strong><c:out value="${promocion.getTipo()}"></c:out></strong></p>
+						
+						<div style="display:inline;margin-right:5px;padding:5px;border-radius:10px;background-color:#ff81c1;color:white;">
+						<c:if test = "${promocion.getClass() == 'class model.PromoAbsoluta'}">
+							Promocion Absoluta
+						</c:if>
+						<c:if test = "${promocion.getClass() == 'class model.PromoPorcentual'}">
+							Promocion Porcentual
+						</c:if>
+						<c:if test = "${promocion.getClass() == 'class model.PromoAxB'}">
+							Promocion AxB
+						</c:if>
+						</div>
+						<c:choose>
+							<c:when test="${
+							usuario.dineroDisponible < promocion.getCosto() || 
+							usuario.tiempoDisponible < promocion.getTiempo() || 
+							promocion.getCupo() <= 0
+							}">
+								<button type="button" 
+								style="float:right;" 
+								class="btn btn-primary btn-sm data-bs-toggle=" 
+								data-bs-toggle="modal" 
+								data-bs-target="#comprar" 
+								data-id="${promocion.id}" 
+								data-nombre="${promocion.nombre}" 
+								disabled
+								>
+									Comprar
+								</button>
+							</c:when>
+							<c:otherwise>
+								<button type="button" 
+								style="float:right;" 
+								class="btn btn-primary btn-sm data-bs-toggle=" 
+								data-bs-toggle="modal" 
+								data-bs-target="#comprar" 
+								data-id="${promocion.id}" 
+								data-nombre="${promocion.nombre}"
+								>
+									Comprar
+								</button>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+			</c:if>
+			
+			<c:if test = "${promocion.getClass() == 'class model.PromoPorcentual'}">
+				<div style="height:20px"></div>
+				<div class="container" style="background-color:white;box-shadow:2px 2px 2px 2px #592A08;">
+					<img src="<c:out value="${promocion.img}"></c:out>" style="display:inline;width:430px;float:left;margin:auto;">
+					<br/>
+					<h2 style="display:inline;padding-left:20px;"><c:out value="${promocion.nombre}"></c:out></h2>
+					<br/><br/>
 					
-				</p>
-
-
-			</div>
-
+					<p style="display:inline;padding-left:20px;">Excursiones Incluidas :</p>
+					<br/><br/>
+					
+					<p style="display:inline">
+						<c:out value="${promocion.descripcion}"></c:out>
+					</p>
+					<hr style="width:55%;margin:auto;"/>
+					
+					<c:forEach items="${promocion.getExcursiones()}" var="exc">
+						<p style="display:inline;padding-left:20px;">
+							<img 
+							style="display:inline;width:80px;height:40px;"
+							alt="imagen" 
+							src="<c:out value="${exc.img}"></c:out>">
+							<c:out value="${exc.nombre}"></c:out>
+						</p>
+						<i class="fa-solid fa-tags" style="color:#ffbb22;margin-left:5px;"></i>
+						<p style="display:inline;"><c:out value="${exc.getCupo()}"></c:out></p>
+						<i class="fa-solid fa-money-bill-1-wave" style="color:#ffbb22;margin-left:5px;"></i>
+						<p style="display:inline;text-decoration:line-through;"><c:out value="${exc.getCosto()}">0</c:out></p>
+						<i class="fa-solid fa-clock" style="color:#ffbb22;margin-left:5px;"></i>
+						<p style="display:inline;"><c:out value="${exc.getTiempo()}"> min.</c:out></p>
+						
+						<i class="fa-solid fa-check" style="float:right;color:#11bb66;"></i>
+						<br/>
+						<hr style="width:55%;margin:auto;"/>
+					</c:forEach>
+					
+					<div style="clear:both;"></div>
+	
+					<div class="text-center" style="background-color:#71d0f599;padding:2px;">
+					
+						<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;background-color:white;">
+						<p style="display:inline;margin-right:5px;"><strong>$<c:out value="${promocion.getCosto()}"></c:out>0</strong></p>
+					
+						<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
+						<p style="display:inline;margin-right:5px;"><strong><c:out value="${promocion.getTiempo()}"></c:out> min.</strong></p>
+						
+						<img alt="cupo" src="./img/cupo.jpg" width="35px" style="display-block:inline;">
+						<p style="display:inline;margin-right:5px;"><strong><c:out value="${promocion.getCupo()}"></c:out></strong></p>
+							
+						<p style="display:inline;margin-right:5px;padding:5px;border-radius:10px;background-color:#11bb66;color:white;"><strong><c:out value="${promocion.getTipo()}"></c:out></strong></p>
+						
+						<div style="display:inline;margin-right:5px;padding:5px;border-radius:10px;background-color:#ff81c1;color:white;">
+							<c:if test = "${promocion.getClass() == 'class model.PromoAbsoluta'}">
+								Promocion Absoluta
+							</c:if>
+							<c:if test = "${promocion.getClass() == 'class model.PromoPorcentual'}">
+								Promocion Porcentual
+							</c:if>
+							<c:if test = "${promocion.getClass() == 'class model.PromoAxB'}">
+								Promocion AxB
+							</c:if>
+						</div>
+						
+						<i class="fa-solid fa-percent" style="color:black;margin-left:5px;"></i>
+						<p div style="display:inline;"><strong><c:out value="${promocion.getDescuento()}"></c:out>% de descuento</strong></p>
+						
+						<c:choose>
+							<c:when test="${
+							usuario.dineroDisponible < promocion.getCosto() || 
+							usuario.tiempoDisponible < promocion.getTiempo() || 
+							promocion.getCupo() < 0
+							}">
+								<button type="button" 
+								style="float:right;" 
+								class="btn btn-primary btn-sm data-bs-toggle=" 
+								data-bs-toggle="modal" 
+								data-bs-target="#comprar" 
+								data-id="${promocion.id}" 
+								data-nombre="${promocion.nombre}" 
+								disabled
+								>
+									Comprar
+								</button>
+							</c:when>
+							<c:otherwise>
+								<button type="button" 
+								style="float:right;" 
+								class="btn btn-primary btn-sm data-bs-toggle=" 
+								data-bs-toggle="modal" 
+								data-bs-target="#comprar" 
+								data-id="${promocion.id}" 
+								data-nombre="${promocion.nombre}"
+								>
+									Comprar
+								</button>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+			</c:if>
+			
+			<c:if test = "${promocion.getClass() == 'class model.PromoAxB'}">
+				<div style="height:20px"></div>
+				<div class="container" style="background-color:white;box-shadow:2px 2px 2px 2px #592A08;">
+					<img src="<c:out value="${promocion.img}"></c:out>" style="display:inline;width:430px;float:left;margin:auto;">
+					<br/>
+					<h2 style="display:inline;padding-left:20px;"><c:out value="${promocion.nombre}"></c:out></h2>
+					<br/><br/>
+					
+					<p style="display:inline;padding-left:20px;">Excursiones Incluidas :</p>
+					<br/><br/>
+					
+					<p style="display:inline">
+						<c:out value="${promocion.descripcion}"></c:out>
+					</p>
+					<hr style="width:55%;margin:auto;"/>
+					
+					<c:set var="cantGratis" value="${promocion.getExcursiones().size() - promocion.getCantGratis()}"></c:set>
+					<c:forEach items="${promocion.getExcursiones()}" var="exc">
+						
+						<c:if test = "${cantGratis > 0}">
+							<p style="display:inline;padding-left:20px;">
+								<img 
+								style="display:inline;width:80px;height:40px;"
+								alt="imagen" 
+								src="<c:out value="${exc.img}"></c:out>">
+								<c:out value="${exc.nombre}"></c:out>
+							</p>
+							<i class="fa-solid fa-tags" style="color:#ffbb22;margin-left:5px;"></i>
+							<p style="display:inline;"><c:out value="${exc.getCupo()}"></c:out></p>
+							<i class="fa-solid fa-money-bill-1-wave" style="color:#ffbb22;margin-left:5px;"></i>
+							<p style="display:inline;"><c:out value="${exc.getCosto()}">0</c:out></p>
+							<i class="fa-solid fa-clock" style="color:#ffbb22;margin-left:5px;"></i>
+							<p style="display:inline;"><c:out value="${exc.getTiempo()}"> min.</c:out></p>
+							
+							<i class="fa-solid fa-check" style="float:right;color:#11bb66;"></i>
+							<br/>
+							<hr style="width:55%;margin:auto;"/>
+						</c:if>
+						<c:if test = "${cantGratis <= 0}">
+							<p style="display:inline;padding-left:20px;">
+								<img 
+								style="display:inline;width:80px;height:40px;"
+								alt="imagen" 
+								src="<c:out value="${exc.img}"></c:out>">
+								<c:out value="${exc.nombre}"></c:out>
+							</p>
+							<i class="fa-solid fa-tags" style="color:#ffbb22;margin-left:5px;"></i>
+							<p style="display:inline;"><c:out value="${exc.getCupo()}"></c:out></p>
+							<i class="fa-solid fa-clock" style="color:#ffbb22;margin-left:5px;"></i>
+							<p style="display:inline;"><c:out value="${exc.getTiempo()}"> min.</c:out></p>
+							<p style="display:inline;margin-right:5px;padding:10px;border-radius:10px;background-color:#11bb66;color:white;font-size:12px"><strong>GRATIS</strong></p>
+							
+							<i class="fa-solid fa-check" style="float:right;color:#11bb66;"></i>
+							<br/>
+							<hr style="width:55%;margin:auto;"/>
+						</c:if>						
+						
+						<c:set var="cantGratis" value="${cantGratis - 1}"></c:set>
+						
+					</c:forEach>
+					
+					<div style="clear:both;"></div>
+	
+					<div class="text-center" style="background-color:#71d0f599;padding:2px;">
+					
+						<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;background-color:white;">
+						<p style="display:inline;margin-right:5px;"><strong>$<c:out value="${promocion.getCosto()}"></c:out>0</strong></p>
+					
+						<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
+						<p style="display:inline;margin-right:5px;"><strong><c:out value="${promocion.getTiempo()}"></c:out> min.</strong></p>
+						
+						<img alt="cupo" src="./img/cupo.jpg" width="35px" style="display-block:inline;">
+						<p style="display:inline;margin-right:5px;"><strong><c:out value="${promocion.getCupo()}"></c:out></strong></p>
+							
+						<p style="display:inline;margin-right:5px;padding:5px;border-radius:10px;background-color:#11bb66;color:white;"><strong><c:out value="${promocion.getTipo()}"></c:out></strong></p>
+						
+						<div style="display:inline;margin-right:5px;padding:5px;border-radius:10px;background-color:#ff81c1;color:white;">
+						<c:if test = "${promocion.getClass() == 'class model.PromoAbsoluta'}">
+							Promocion Absoluta
+						</c:if>
+						<c:if test = "${promocion.getClass() == 'class model.PromoPorcentual'}">
+							Promocion Porcentual
+						</c:if>
+						<c:if test = "${promocion.getClass() == 'class model.PromoAxB'}">
+							Promocion AxB
+						</c:if>
+						</div>
+						<c:choose>
+							<c:when test="${
+							usuario.dineroDisponible < promocion.getCosto() || 
+							usuario.tiempoDisponible < promocion.getTiempo() || 
+							promocion.getCupo() < 0
+							}">
+								<button type="button" 
+								style="float:right;" 
+								class="btn btn-primary btn-sm data-bs-toggle=" 
+								data-bs-toggle="modal" 
+								data-bs-target="#comprar" 
+								data-id="${promocion.id}" 
+								data-nombre="${promocion.nombre}" 
+								disabled
+								>
+									Comprar
+								</button>
+							</c:when>
+							<c:otherwise>
+								<button type="button" 
+								style="float:right;" 
+								class="btn btn-primary btn-sm data-bs-toggle=" 
+								data-bs-toggle="modal" 
+								data-bs-target="#comprar" 
+								data-id="${promocion.id}" 
+								data-nombre="${promocion.nombre}"
+								>
+									Comprar
+								</button>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+			</c:if>
+			
 		</c:forEach>
 		
 	</div>

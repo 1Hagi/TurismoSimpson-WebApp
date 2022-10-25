@@ -52,12 +52,12 @@ public class CompraService {
 		return errors;
 	}
 	
-	public Map<String, String> compraExc(Integer usuarioID, Integer promocionID) {
+	public Map<String, String> compraExc(Integer usuarioID, Integer excursionID) {
 		
 		Map<String, String> errors = new HashMap<String, String>();
 
 		Usuario usuario = usuarioDAO.findByID(usuarioID);
-		Excursion excursion = excursionDAO.findByID(promocionID);
+		Excursion excursion = excursionDAO.findByID(excursionID);
 
 		if (!excursion.hayCupoDisponible()) {
 			errors.put("attraction", "No hay cupo disponible");

@@ -11,6 +11,10 @@ public class PromoAxB extends Promocion {
 		this.cantGratis = cantGratis;
 	}
 
+	public Integer getCantGratis() {
+		return cantGratis;
+	}
+
 	public Double getCosto() {
 		Double costoTotal = 0.0;
 		for (int i = 0; i < this.excursiones.size() - cantGratis; i++) {

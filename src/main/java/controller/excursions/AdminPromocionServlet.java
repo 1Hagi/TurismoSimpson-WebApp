@@ -10,9 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Excursion;
 import model.Promocion;
-import services.ExcursionService;
 import services.PromocionService;
 
 @WebServlet("/adm-promociones.do")
@@ -41,9 +39,9 @@ public class AdminPromocionServlet extends HttpServlet implements Servlet {
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		if(req.getAttribute("excursiones") == null) {
+		if(req.getAttribute("promociones") == null) {
 			List<Promocion> promociones = promocionService.list();
-			req.setAttribute("promociones", excursiones);
+			req.setAttribute("promociones", promociones);
 		}
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/adm-promociones.jsp");

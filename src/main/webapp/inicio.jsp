@@ -6,7 +6,7 @@
 <jsp:include page="partials/head.jsp"></jsp:include>
 <title>Página de Inicio</title>
 </head>
-<body background="img/simpson_background.jpg">
+<body style="background-color: rgb(255, 247, 149);">
 
 	<!-- BARRA DE NAVEGACION -->
 
@@ -30,7 +30,7 @@
 					<li class="nav-item"><a class="nav-link disabled">Administrar</a></li>
 				</ul>
 
-				<a class="btn btn-primary nav-item" href="login.jsp" role="button">Ingresar</a>
+				<a class="btn btn-primary nav-item" style="margin-right:10px;" href="login.jsp" role="button">Ingresar</a>
 				
 				<a class="btn btn-primary nav-item" href="registro.jsp" role="button">Registrarse</a>
 
@@ -102,105 +102,111 @@
 	
 	<!-- SECCION OFERTAS INDIVIDUALES -->
 
-	<div class="container" style="background-color: rgb(255, 216, 33)">
+	<div class="container" style="background-color:rgb(255, 216, 33)">
 		<div class="row" style="padding-top: 1em;">
-			<div class="col-lg-3">
-				<div class="card" style="width: 16rem;">
-					<img src="img/offers/742_Evergreen_Terrace.jpg" height="140px"
-						class="card-img-top" alt="tarjeta">
-					<div class="card-body">
-						<h5 class="card-title text-center">742 Evergreen Terrace</h5>
+			
+				<div class="col-lg-3">
+					<div class="card" style="width: 16rem;margin-bottom:20px;">
+					
+
+						<p style="margin-bottom:0;background-color:blue;color:white;text-align: center">Excursion</p>
+
 						
-						<p class="text-center;"
-							style="background-color: rgb(0, 250, 244); padding: 2px;">
-							<img alt="dinero" src="img/dinero.png" width="35px"
-								style="display-block: inline;"> $ 250,00 <img alt="dinero"
-								src="img/tiempo.jpg" width="35px" style="display-block: inline;">
-							40 min.
-						</p>
-						<a href="#ventana1" data-toggle="modal" class="btn btn-primary">Comprar</a>
-						<button type="button" class="btn btn-primary"
-							data-bs-toggle="modal" data-bs-target="#ventana1">
-							Launch demo modal</button>
+						<img src="./img/offers/742_Evergreen_Terrace.jpg" height="140px" class="card-img-top"
+							alt="tarjeta">
+							
+						<div class="card-body">
+							<h6 class="card-title text-center"><small>742 Evergreen Terrace</small></h6>
+
+							<p class="text-center;" style="background-color:rgb(0, 250, 244); padding:2px;">
+								<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">$
+								250.00
+								<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
+								30 min.
+							</p>
+							
+							<a href="#ventana1" data-toggle="modal" class="btn btn-primary" style="margin-left:30%">Comprar</a>
+						</div>
+						
 					</div>
 				</div>
-			</div>
-			<div class="col-lg-3">
-				<div class="card" style="width: 16rem;">
-					<img src="img/offers/744_Evergreen_Terrace.jpg" height="140px"
-						class="card-img-top" alt="tarjeta">
-					<div class="card-body">
-						<h5 class="card-title text-center">744 Evergreen Terrace</h5>
+				
+				<div class="col-lg-3">
+					<div class="card" style="width: 16rem;margin-bottom:20px;">
 
-						<a href="#" class="btn btn-primary">Go somewhere</a>
+						<p style="margin-bottom:0;background-color:purple;color:white;text-align: center">Promocion</p>
+
+						
+						<img src="./img/offers/imagen_default.jpg" height="140px" class="card-img-top"
+							alt="tarjeta">
+							
+						<div class="card-body">
+							<h6 class="card-title text-center"><small>Videojuegos</small></h6>
+
+							<p class="text-center;" style="background-color:rgb(0, 250, 244); padding:2px;">
+								<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">$
+								250.00
+								<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
+								120 min.
+							</p>
+							
+							<a href="#ventana1" data-toggle="modal" class="btn btn-primary" style="margin-left:30%">Comprar</a>
+						</div>
+						
 					</div>
 				</div>
-			</div>
-			<div class="col-lg-3">
-				<div class="card" style="width: 16rem;">
-					<img src="img/offers/Planta_Nuclear_de_Springfield.jpg" height="140px"
-						class="card-img-top" alt="tarjeta">
-					<div class="card-body">
-						<h5 class="card-title">Una Oferta</h5>
+				
+				<div class="col-lg-3">
+					<div class="card" style="width: 16rem;margin-bottom:20px;">
+					
 
-						<a href="#" class="btn btn-primary">Go somewhere</a>
+						<p style="margin-bottom:0;background-color:blue;color:white;text-align: center">Excursion</p>
+
+						
+						<img src="./img/offers/Springfield_Court_House.jpg" height="140px" class="card-img-top"
+							alt="tarjeta">
+							
+						<div class="card-body">
+							<h6 class="card-title text-center"><small>Springfield Court House</small></h6>
+
+							<p class="text-center;" style="background-color:rgb(0, 250, 244); padding:2px;">
+								<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">$
+								260.00
+								<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
+								50 min.
+							</p>
+							
+							<a href="#ventana1" data-toggle="modal" class="btn btn-primary" style="margin-left:30%">Comprar</a>
+						</div>
+						
 					</div>
 				</div>
-			</div>
-			<div class="col-lg-3">
-				<div class="card" style="width: 16rem;">
-					<img src="img/offers/Estudios_Krustylu.jpg" class="card-img-top"
-						alt="tarjeta">
-					<div class="card-body">
-						<h5 class="card-title">Una Oferta</h5>
+				
+				<div class="col-lg-3">
+					<div class="card" style="width: 16rem;margin-bottom:20px;">
 
-						<a href="#" class="btn btn-primary">Go somewhere</a>
+						<p style="margin-bottom:0;background-color:purple;color:white;text-align: center">Promocion</p>
+
+						
+						<img src="./img/offers/imagen_default.jpg" height="140px" class="card-img-top"
+							alt="tarjeta">
+							
+						<div class="card-body">
+							<h6 class="card-title text-center"><small>TodoCompra</small></h6>
+
+							<p class="text-center;" style="background-color:rgb(0, 250, 244); padding:2px;">
+								<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">$
+								300.00
+								<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
+								180 min.
+							</p>
+							
+							<a href="#ventana1" data-toggle="modal" class="btn btn-primary" style="margin-left:30%">Comprar</a>
+						</div>
+						
 					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row" style="padding-top: 1em;">
-			<div class="col-lg-3">
-				<div class="card" style="width: 16rem;">
-					<img src="img/offers/Springfield_Court_House.jpg" class="card-img-top"
-						alt="tarjeta">
-					<div class="card-body">
-						<h5 class="card-title">Una Oferta</h5>
-
-						<a href="#" class="btn btn-primary">Go somewhere</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3">
-				<div class="card" style="width: 16rem;">
-					<img src="img/offers/744_Evergreen_Terrace.jpg" class="card-img-top"
-						alt="tarjeta">
-					<div class="card-body">
-						<h5 class="card-title">Una Oferta</h5>
-
-						<a href="#" class="btn btn-primary">Go somewhere</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="ventana1" tabindex="-1"
-		aria-labelledby="ventana1" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="ventana1">Modal title</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">...</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
-			</div>
+				</div>	
+			
 		</div>
 	</div>
 

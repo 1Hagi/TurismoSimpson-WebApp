@@ -9,9 +9,11 @@
 </head>
 <body style="background-color: rgb(255, 247, 149);">
 
-	<p class="container text-center">Bienvenido a Turismo Simpson, para
+	<p class="container text-center" style="height:100px;background-color:#f8db27;font-size:20px;padding-top:20px;">
+	Bienvenido a Turismo Simpson, para
 		utilizar todas las funcionalidades de la App debes iniciar sesion o
-		registrarte, si eres nuevo.</p>
+		registrarte, si eres nuevo.
+	</p>
 
 	<br>
 

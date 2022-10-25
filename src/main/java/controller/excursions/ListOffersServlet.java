@@ -1,6 +1,7 @@
 package controller.excursions;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
@@ -11,6 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Oferta;
+import model.Ordenamiento;
+import model.Usuario;
 import services.OfferService;
 
 @WebServlet("/logged.do")
@@ -31,6 +34,8 @@ public class ListOffersServlet extends HttpServlet implements Servlet {
 		if(req.getAttribute("ofertas") == null) {
 			List<Oferta> ofertas = ofertaService.list();
 			req.setAttribute("ofertas", ofertas);
+			Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
+			Collections.sort(ofertas, new Ordenamiento(usuario.getFavorito()));
 		}
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/logged.jsp");
