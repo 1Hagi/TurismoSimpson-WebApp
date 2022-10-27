@@ -14,24 +14,24 @@ Login de usuarios y generación automática de itinerario de compras realizadas.
 
 -- Características:
 
-  * Usuarios: 
-      - tienen un dinero y tiempo disponible.
-      - categoria de excursión favorita.
-      - un itinerario asociado de compras realizadas.
-  * Excursiones:
-      - tienen un costo y tiempo para comprarla.
-      - una categoria específica.
-      - cupos de disponibilidad.
-  * Promociones:
-      - son packs de excursiones.
-      - pueden contener de 2 a más excursiones.
-      - tiempo y costo.
-      - una categoria específica.
-      - cupos de disponibilidad.
-      - un tipo de descuento en el precio.
+  - Usuarios: 
+      * tienen un dinero y tiempo disponible.
+      * categoria de excursión favorita.
+      * un itinerario asociado de compras realizadas.
+  - Excursiones:
+      * tienen un costo y tiempo para comprarla.
+      * una categoria específica.
+      * cupos de disponibilidad.
+  - Promociones:
+      * son packs de excursiones.
+      * pueden contener de 2 a más excursiones.
+      * tiempo y costo.
+      * una categoria específica.
+      * cupos de disponibilidad.
+      * un tipo de descuento en el precio.
   * Itinerario:
-      - es una lista de compras realizadas.
-      - está vinculado a cada usuario.
+      * es una lista de compras realizadas.
+      * está vinculado a cada usuario.
       
       
 -- Funcionamiento:
