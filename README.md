@@ -6,11 +6,11 @@ Aplicación completa con temática de *Los Simpsons* de venta de excursiones y p
 Login de usuarios y generación automática de itinerario de compras realizadas.
 
 -- Tecnologías utilizadas :
-   
-   *BACK-END : Java, Servlets, Servicios, Filtros, Capas (Persistence, Model, Controller, Users) JDBC, patrón DAO, Algoritmos de Ordenamiento.
-   *FRONT-END : Html, Css, Javascript, Bootstrap, JQuery, JSP, JSTL. 
-   *BBDD: SQlite, tablas Ai, Pk, NN, FK, U.
-   *Otros: Patróndiseño MVC+S, Maven Proyect, Apache Tomcat, Eclipse-IDE.
+
+   * BACK-END : Java, Servlets, Servicios, Filtros, Capas (Persistence, Model, Controller, Users) JDBC, patrón DAO, Algoritmos de Ordenamiento.
+   * FRONT-END : Html, Css, Javascript, Bootstrap, JQuery, JSP, JSTL. 
+   * BBDD: SQlite, tablas Ai, Pk, NN, FK, U.
+   * Otros: Patróndiseño MVC+S, Maven Proyect, Apache Tomcat, Eclipse-IDE.
 
 -- Características:
 
