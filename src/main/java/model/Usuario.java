@@ -2,8 +2,10 @@ package model;
 
 import java.io.*;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class Usuario {
@@ -53,6 +55,11 @@ public class Usuario {
 		return dineroDisponible;
 	}
 
+	public String getDineroFormateado() {
+		NumberFormat formatoDinero = NumberFormat.getInstance(new Locale("es", "ES"));
+		return formatoDinero.format(this.dineroDisponible);
+	}
+	
 	public OfertaTipo getFavorito() {
 		return this.tipoFavorito;
 	}

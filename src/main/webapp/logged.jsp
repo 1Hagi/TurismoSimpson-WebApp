@@ -93,6 +93,8 @@
 								<c:out value="${oferta.getTiempo()}"></c:out> min.
 							</p>
 							
+							<p style="margin:;text-align:center;margin:auto;padding:3px;border-radius:10px;background-color:#11bb66;color:white;width:70%;margin-bottom:10px;font-size:14px"><strong><c:out value="${oferta.getTipo()}"></c:out></strong></p>
+						
 							<a href="#ventana1" data-toggle="modal" class="btn btn-primary" style="margin-left:30%">Comprar</a>
 						</div>
 						

@@ -90,13 +90,21 @@
 			</c:if>
 				
 			<!-- Usuario -->			
-					
-			<img class="rounded-circle nav-item" alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">
-			<p class="aling-middle" style="margin-bottom:0px;margin-left:5px;background-color:white;border-radius:10px;padding:3px;">$ <c:out value="${usuario.dineroDisponible}"></c:out>0 </p>
+			
+			<div class="aling-middle" style="background-color:white;border-radius:20px 10px 10px 20px;padding:3px;padding-left:0px;padding-right:6px;">
+				<img alt="tiempo" src="img/dinero.jpg" style="position:absolute;display:inline-block;width:45px;top:8px;border-radius:50%"></img>
+				<p class="aling-middle" style="display:inline-block;margin-bottom:0px;margin-left:50px;background-color:white;border-radius:10px;font-size:18px;">
+					<strong>$ <c:out value="${usuario.getDineroFormateado()}"></c:out>,00</strong> 
+				</p>
+			</div>
+			
+			<div class="aling-middle" style="background-color:white;border-radius:20px 10px 10px 20px;padding:3px;padding-left:0px;padding-right:6px;margin-left:10px;">
+				<img alt="tiempo" src="img/tiempo2.jpg" style="position:absolute;display:inline-block;width:45px;top:8px;border-radius:50%"></img>
+				<p class="aling-middle" style="display:inline-block;margin-bottom:0px;margin-left:50px;background-color:white;border-radius:10px;font-size:18px;">
+					<strong><c:out value="${usuario.tiempoDisponible}"></c:out> min.</strong> 
+				</p>
+			</div>
 				
-			<img class="rounded-circle" alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;margin-left:10px;">
-			<p class="aling-middle" style="margin-bottom:0px;margin-left:5px;background-color:white;border-radius:10px;padding:3px;"><c:out value="${usuario.tiempoDisponible}"></c:out>' min.</p>
-		
 			<p style="display:inline;margin-right:5px;margin-bottom:3px;margin-left:10px;padding:4px;border-radius:10px;background-color:#f87327;color:white;font-size:14px;box-shadow:2px 2px 2px #180b03"><strong><c:out value="${usuario.getFavorito()}"></c:out></strong></p>
 
 			<p style="margin-bottom:0px;padding:3px;margin-left:10px;margin-right:10px;font-size:18px;color:#948317">|</p>

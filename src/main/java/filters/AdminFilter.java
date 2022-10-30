@@ -12,15 +12,14 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import model.Usuario;
 
-// QUITAR COMENTARIOS ANTES DE SUBIR
-// @WebFilter(urlPatterns = {"/administrador.jsp"})
+@WebFilter(urlPatterns = {"/adm-excursiones.do" , "/adm-usuarios.do", "/adm-promociones.do"})
 public class AdminFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
 		Usuario usuario = (Usuario) ((HttpServletRequest) request).getSession().getAttribute("usuario");
-		if (usuario != null && usuario.getAdmin()) {
+		if (usuario == null  || usuario.getAdmin()) {
 			chain.doFilter(request, response);
 		} else {
 			request.setAttribute("flash", "Usted no posee permisos de Administrador para la solicitud enviada");
