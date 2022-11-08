@@ -7,11 +7,12 @@
 <jsp:include page="partials/head.jsp"></jsp:include>
 <title>Página de Inicio</title>
 </head>
-<body style="background-color: rgb(255, 247, 149);">
+<body style="background-image: url(./img/background4.jpg);background-repeat:no-repeat;background-attachment:fixed;background-size: cover;">
 	
 	<!-- BARRA DE NAVEGACION -->
 	
 	<jsp:include page="partials/navbar.jsp"></jsp:include>
+	<div class="container" style="height:100px;z-index: ;"></div>
 	
 	<!-- EL CARRUSEL -->
 
@@ -65,33 +66,41 @@
 			
 			<c:forEach items="${ofertas}" var="oferta">
 				<div class="col-lg-3">
-					<div class="card" style="width: 16rem;margin-bottom:20px;">
+					<div class="card" style="width: 16rem;margin-bottom:20px; box-shadow: 2px 2px 2px olive, -2px -2px 2px olive;">
 					
 						<c:if test = "${oferta.getClass() == 'class model.Excursion'}">
-							<p style="margin-bottom:0;background-color:blue;color:white;text-align: center">Excursion</p>
+							<p class="tarjeta-header-exc">Excursion</p>
 						</c:if>
 						<c:if test = "${oferta.getClass() == 'class model.PromoAbsoluta'}">
-							<p style="margin-bottom:0;background-color:purple;color:white;text-align: center">Promocion</p>
+							<p class="tarjeta-header-prom">Promocion</p>
 						</c:if>
 						<c:if test = "${oferta.getClass() == 'class model.PromoPorcentual'}">
-							<p style="margin-bottom:0;background-color:purple;color:white;text-align: center">Promocion</p>
+							<p class="tarjeta-header-prom">Promocion</p>
 						</c:if>
 						<c:if test = "${oferta.getClass() == 'class model.PromoAxB'}">
-							<p style="margin-bottom:0;background-color:purple;color:white;text-align: center">Promocion</p>
+							<p class="tarjeta-header-prom">Promocion</p>
 						</c:if>
 						
-						<img src="<c:out value="${oferta.img}"></c:out>" height="140px" class="card-img-top"
+						<img class="tarjeta-imagen" src="<c:out value="${oferta.img}"></c:out>" height="140px" class="card-img-top"
 							alt="tarjeta">
 							
 						<div class="card-body">
 							<h6 class="card-title text-center"><small><c:out value="${oferta.nombre}"></c:out></small></h6>
-
-							<p class="text-center;" style="background-color:rgb(0, 250, 244); padding:2px;">
-								<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">$
-								<c:out value="${oferta.getCosto()}"></c:out>0
-								<img alt="dinero" src="img/tiempo.jpg" width="35px" style="display-block:inline;">
-								<c:out value="${oferta.getTiempo()}"></c:out> min.
-							</p>
+							
+							<div style="display-block:inline;">
+							
+								<p class="text-center;" style="border:solid 1px; box-shadow: 1px 1px 2px olive, -1px -1px 2px olive;">
+									<img alt="dinero" src="img/dinero.png" width="35px" style="display-block:inline;">
+									$ <c:out value="${oferta.getCosto()}"></c:out>0
+									<img alt="tiempo" src="img/tiempo.jpg" width="35px" style="display-block:inline;border-radius:50%;height: 100%">
+									<c:out value="${oferta.getTiempo()}"></c:out> min.
+								</p>
+								
+								<p class="text-center;" style="display: inline; border:solid 1px; padding:2px;box-shadow: 1px 1px 2px olive, -1px -1px 2px olive;">
+									<img alt="tiempo" src="img/tiempo.jpg" width="35px" style="display-block:inline;border-radius:50%;height: 100%">
+									<c:out value="${oferta.getTiempo()}"></c:out> min.
+								</p>
+							</div>
 							
 							<p style="margin:;text-align:center;margin:auto;padding:3px;border-radius:10px;background-color:#11bb66;color:white;width:70%;margin-bottom:10px;font-size:14px"><strong><c:out value="${oferta.getTipo()}"></c:out></strong></p>
 						

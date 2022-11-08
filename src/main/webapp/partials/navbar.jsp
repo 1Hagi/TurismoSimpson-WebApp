@@ -47,11 +47,11 @@
 								
 							<c:set var="dineroTotal" value="${0}"></c:set>
 							<c:set var="tiempoTotal" value="${0}"></c:set>
-								
+
 							<c:forEach items="${usuario.getItinerario()}" var="itinerario">
 								<c:set var="dineroTotal" value="${dineroTotal + itinerario.getCosto()}"></c:set>
 								<c:set var="tiempoTotal" value="${tiempoTotal + itinerario.getTiempo()}"></c:set>
-								
+
 								<c:choose>
 									<c:when test="${itinerario.getClass() == 'class model.Excursion'}">
 										<div class="dropdown-item" style="background-color:#d3d9fd;">

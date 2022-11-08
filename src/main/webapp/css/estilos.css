@@ -1,3 +1,35 @@
 .navbar {
-	background-color: rgb(255, 216, 33);
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background-color: #fbc704;
+	z-index: 1;
+	box-shadow: 2px 2px 2px olive
+}
+
+/* Sección Tarjetas */
+
+.card-body {
+	background-color: #FDEDEC;
+}
+
+.tarjeta-header-exc {
+	margin-bottom: 0;
+	background-color: blue;
+	color: white;
+	text-align: center;
+	border-radius:5px 5px 0 0;
+}
+
+.tarjeta-header-prom {
+	margin-bottom: 0;
+	background-color: purple;
+	color: white;
+	text-align: center;
+	border-radius:5px 5px 0 0;	
+}
+
+.tarjeta-imagen {
+	border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
