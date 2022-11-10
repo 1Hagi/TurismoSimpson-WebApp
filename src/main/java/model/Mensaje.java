@@ -13,7 +13,7 @@ public class Mensaje {
 	}
 
 	public static void finPrograma() {
-		System.out.println("\nEl programa ha finalizado, gracias por utilizar ésta App!");
+		System.out.println("\nEl programa ha finalizado, gracias por utilizar esta App!");
 	}
 
 	public static void deseaComprar(Oferta unaOferta) {
