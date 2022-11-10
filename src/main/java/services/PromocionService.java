@@ -1,10 +1,12 @@
 package services;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Excursion;
 import model.OfertaTipo;
+import model.PromoAbsoluta;
 import model.Promocion;
 import persistence.ExcursionDAO;
 import persistence.PromocionDAO;
@@ -51,15 +53,15 @@ public class PromocionService {
 			String descripcion) {
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
 		OfertaTipo ofertaTipo = promocionDAO.toTipo(tipo_oferta);
-
-		Promocion excursion = new Promocion(nombre, fileName, id, ofertaTipo, tiempo, costo, cupo, descripcion, "0");
-
-		if (promocion.isValid()) {
-			promocionDAO.update(excursion);
-			// XXX: si no devuelve "1", es que hubo más errores
-		}
-		
-		return excursion;
+//
+		Promocion promocion = new PromoAbsoluta(nombre, fileName, id, ofertaTipo, new ArrayList<Excursion>(), costo, descripcion, "0");
+//
+//		if (promocion.isValid()) {
+//			promocionDAO.update(excursion);
+//			// XXX: si no devuelve "1", es que hubo más errores
+//		}
+//		
+		return promocion;
 	}
 	
 	

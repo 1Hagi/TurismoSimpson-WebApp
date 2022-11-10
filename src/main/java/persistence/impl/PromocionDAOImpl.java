@@ -118,7 +118,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 		return excursionesIncluidas;
 	}
 
-	private OfertaTipo toTipo(int id) {
+	public OfertaTipo toTipo(int id) {
 		switch(id) {
 		case 1:
 			return OfertaTipo.VISITAGUIADA;
